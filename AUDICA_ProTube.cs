@@ -9,7 +9,7 @@ using UnityEngine;
 using Il2Cpp;
 using System.Text.Json;
 
-[assembly: MelonInfo(typeof(AUDICA_ProTube.AUDICA_ProTube), "AUDICA_ProTube", "1.0.0", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(AUDICA_ProTube.AUDICA_ProTube), "AUDICA_ProTube", "1.0.1", "Florian Fahrenberger")]
 [assembly: MelonGame("Harmonix Music Systems, Inc.", "Audica")]
 
 namespace AUDICA_ProTube
@@ -47,16 +47,16 @@ namespace AUDICA_ProTube
             {
                 dualWield = true;
                 MelonLogger.Msg("Two ProTube devices detected, player is dual wielding.");
-                if ((readChannel("pistol1") == "") || (readChannel("pistol2") == ""))
+                if ((readChannel("rightHand") == "") || (readChannel("leftHand") == ""))
                 {
                     MelonLogger.Msg("No configuration files found, saving current right and left hand pistols.");
-                    saveChannel("pistol1", pistol1[0].GetProperty("name").ToString());
-                    saveChannel("pistol2", pistol2[0].GetProperty("name").ToString());
+                    saveChannel("rightHand", pistol1[0].GetProperty("name").ToString());
+                    saveChannel("leftHand", pistol2[0].GetProperty("name").ToString());
                 }
                 else
                 {
-                    string rightHand = readChannel("pistol1");
-                    string leftHand = readChannel("pistol2");
+                    string rightHand = readChannel("rightHand");
+                    string leftHand = readChannel("leftHand");
                     MelonLogger.Msg("Found and loaded configuration. Right hand: " + rightHand + ", Left hand: " + leftHand);
                     ForceTubeVRInterface.ClearChannel(4);
                     ForceTubeVRInterface.ClearChannel(5);
