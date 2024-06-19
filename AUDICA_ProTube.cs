@@ -9,7 +9,7 @@ using UnityEngine;
 using Il2Cpp;
 using System.Text.Json;
 
-[assembly: MelonInfo(typeof(AUDICA_ProTube.AUDICA_ProTube), "AUDICA_ProTube", "1.0.1", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(AUDICA_ProTube.AUDICA_ProTube), "AUDICA_ProTube", "1.1.0", "Florian Fahrenberger")]
 [assembly: MelonGame("Harmonix Music Systems, Inc.", "Audica")]
 
 namespace AUDICA_ProTube
@@ -63,6 +63,16 @@ namespace AUDICA_ProTube
                     ForceTubeVRInterface.AddToChannel(4, rightHand);
                     ForceTubeVRInterface.AddToChannel(5, leftHand);
                 }
+            }
+            else if (File.Exists(configPath + "lefty.pro"))
+            {
+                MelonLogger.Msg("File for only left channel detected. Player is a lefty.");
+                string leftHand = pistol1[0].GetProperty("name").ToString();
+                MelonLogger.Msg("Found one ProTube device. Left hand: " + leftHand);
+                ForceTubeVRInterface.ClearChannel(4);
+                ForceTubeVRInterface.ClearChannel(5);
+                // ForceTubeVRInterface.AddToChannel(4, rightHand);
+                ForceTubeVRInterface.AddToChannel(5, leftHand);
             }
         }
 
